@@ -7,10 +7,9 @@ if not os.getegid() == 0:
     sys.exit('Script must be run as root')
 
 from time import sleep
-from OPi.gpio import gpio
-from OPi.gpio import port
+from OPi import gpio
 
-led = port.IO17
+led = gpio.IO11
 
 gpio.init()
 gpio.setcfg(led, gpio.OUTPUT)
@@ -32,4 +31,4 @@ try:
 
 except KeyboardInterrupt:
     gpio.output(led, 0)
-	print ("Bye.")
+    print ("Bye.")

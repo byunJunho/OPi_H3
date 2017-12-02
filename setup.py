@@ -11,7 +11,6 @@ try:
 except NameError:
     pass
 
-
 def print_color(text):
     """
     Print text in yellow :)
@@ -20,7 +19,6 @@ def print_color(text):
     """
 
     return '\033[0;33m' + text + '\033[0m'
-
 
 def print_warning():
     """
@@ -36,7 +34,6 @@ def print_warning():
     else:
         print ("Abort.")
         sys.exit(1)
-
 
 def check_processor():
     """
@@ -65,16 +62,13 @@ def check_processor():
     print ("No processor detected")
     print_warning()
 
-
 class build_ext(_build_ext):
     def run(self):
         check_processor()
         _build_ext.run(self)
 
-
 modules = [
-    Extension('OPi.gpio.gpio', sources=['OPi/gpio/gpio_lib.c', 'OPi/gpio/gpio.c']),
-    Extension('OPi.gpio.port', sources=['OPi/gpio/port/port.c']),
+    Extension('OPi.gpio', sources=['OPi/gpio/gpio_lib.c', 'OPi/gpio/gpio.c']),
     Extension('OPi.i2c', sources=['OPi/i2c/i2c_lib.c', 'OPi/i2c/i2c.c']),
     Extension('OPi.spi', sources=['OPi/spi/spi_lib.c', 'OPi/spi/spi.c']),
 ]
@@ -85,7 +79,7 @@ setup(
     author='Jeremie',
     url='https://github.com/Jeremie-C/OPI_H3',
     license='MIT',
-    packages=['OPi', 'OPi.gpio'],
+    packages=['OPi'],
     description='Control GPIO, I2C and SPI',
     long_description=open('README.txt').read() + open('CHANGES.txt').read(),
     classifiers=['Development Status :: 3 - Alpha',

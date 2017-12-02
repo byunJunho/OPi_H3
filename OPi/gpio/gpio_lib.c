@@ -21,7 +21,6 @@
  * MA 02110-1301, USA.
  */
 
-
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
@@ -51,7 +50,6 @@ int sunxi_gpio_init(void) {
     if (fd < 0) {
         return (-1);
     }
-
 
     PageSize = sysconf(_SC_PAGESIZE);
     PageMask = (~(PageSize - 1));

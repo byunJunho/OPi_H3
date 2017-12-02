@@ -21,9 +21,9 @@
  * MA 02110-1301, USA.
  */
 
-
 #include "Python.h"
 #include "gpio_lib.h"
+#include "mapping.h"
 
 /**
  * Set output value of GPIO. Pin must be configured as output or else raises
@@ -167,7 +167,6 @@ static PyObject* py_pullup(PyObject* self, PyObject* args) {
     Py_RETURN_NONE;
 }
 
-
 /* Define module methods */
 static PyMethodDef module_methods[] = {
     {"init",    py_init,        METH_NOARGS,    "Initialize module"},
@@ -191,20 +190,19 @@ static struct PyModuleDef module_def = {
 
 PyMODINIT_FUNC
 #if PY_MAJOR_VERSION >= 3
-    PyInit_gpio(void) {
+PyInit_gpio(void) {
 #else
-    initgpio(void) {
+initgpio(void) {
 #endif
-
+    int i;
+    int j;
     PyObject* module = NULL;
-
 
 #if PY_MAJOR_VERSION >= 3
     module = PyModule_Create(&module_def);
 #else
     module = Py_InitModule("gpio", module_methods);
 #endif
-
 
     if (module == NULL)
 #if PY_MAJOR_VERSION >= 3
@@ -213,6 +211,16 @@ PyMODINIT_FUNC
         return;
 #endif
 
+    for(i = 0; i < sizeof(gpio)/sizeof(gpio[0]); i++){
+        for(j = 0; j < 40; j++){
+            if(!strcmp(gpio[i].pins[j].name, "")){
+                break;
+            } else {
+                PyModule_AddObject(module, gpio[i].pins[j].name, Py_BuildValue("i", gpio[i].pins[j].offset));
+            }
+        }
+    }
+
     PyModule_AddObject(module, "HIGH", Py_BuildValue("i", 1));
     PyModule_AddObject(module, "LOW", Py_BuildValue("i", 0));
     PyModule_AddObject(module, "INPUT", Py_BuildValue("i", SUNXI_GPIO_INPUT));
@@ -220,7 +228,6 @@ PyMODINIT_FUNC
 
     PyModule_AddObject(module, "PULLUP", Py_BuildValue("i", SUNXI_PULL_UP));
     PyModule_AddObject(module, "PULLDOWN", Py_BuildValue("i", SUNXI_PULL_DOWN));
-
 
     #if PY_MAJOR_VERSION >= 3
         return module;

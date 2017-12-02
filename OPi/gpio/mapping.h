@@ -42,46 +42,75 @@ typedef struct _gpio {
 
 
 gpio_t gpio[] = {
-	{"gpio1",
+	{"gpin",
         {
-            {   "IO2",   SUNXI_GPA(12),   3  },	// I2C SDA
-            {   "IO3",   SUNXI_GPA(11),   5  },	// I2C SCL
-            {   "IO4",   SUNXI_GPA(6),    7  }, // PWM       
-            {   "IO17",  SUNXI_GPA(1),   11  },
-            {   "IO27",  SUNXI_GPA(0),   13  },
-            {   "IO22",  SUNXI_GPA(3),   15  },
-            {   "IO10",  SUNXI_GPC(0),   19  },	// SPI MOSI
-			{   "IO9",   SUNXI_GPC(1),   21  },	// SPI MISO
-            {   "IO11",  SUNXI_GPC(2),   23  },	// SPI CLK
-            {   "IO31",  SUNXI_GPA(19),  27  },
+            {   "IO2",   SUNXI_GPA(12),   3  },    // I2C SDA.0
+            {   "IO3",   SUNXI_GPA(11),   5  },    // I2C SCL.0
+            {   "IO4",   SUNXI_GPA(6),    7  },    // PWM       
+            {   "IO17",  SUNXI_GPA(1),   11  },    // UART RX.2
+            {   "IO27",  SUNXI_GPA(0),   13  },    // UART TX.2
+            {   "IO22",  SUNXI_GPA(3),   15  },    // UART CTS.2
+            {   "IO10",  SUNXI_GPC(0),   19  },    // SPI MOSI.0
+            {   "IO9",   SUNXI_GPC(1),   21  },    // SPI MISO.1
+            {   "IO11",  SUNXI_GPC(2),   23  },    // SPI CLK.1
+            {   "IO31",  SUNXI_GPA(19),  27  },    // I2C SDA.1
             {   "IO5",   SUNXI_GPA(7),   29  },
             {   "IO6",   SUNXI_GPA(8),   31  },
             {   "IO13",  SUNXI_GPA(9),   33  },
             {   "IO19",  SUNXI_GPA(10),  35  },
             {   "IO26",  SUNXI_GPA(20),  37  },
-            {   "IO14",  SUNXI_GPA(13),   8  },	// UART TX
-            {   "IO15",  SUNXI_GPA(14),  10  },	// UART RX
+            {   "IO14",  SUNXI_GPA(13),   8  },    // UART TX.3
+            {   "IO15",  SUNXI_GPA(14),  10  },    // UART RX.3
             {   "IO18",  SUNXI_GPD(14),  12  },
             {   "IO23",  SUNXI_GPC(4),   16  },
             {   "IO24",  SUNXI_GPC(7),   18  },
-            {   "IO25",  SUNXI_GPA(2),   22  },
-            {   "IO8",   SUNXI_GPC(3),   24  },	// SPI CSO
+            {   "IO25",  SUNXI_GPA(2),   22  },    // UART RTS.2
+            {   "IO8",   SUNXI_GPC(3),   24  },    // SPI CSO.1
             {   "IO7",   SUNXI_GPA(21),  26  },
-            {   "IO32",  SUNXI_GPA(18),  28  },
-            {   "IO12",  SUNXI_GPG(8),   32  },
-            {   "IO16",  SUNXI_GPG(9),   36  },
-            {   "IO20",  SUNXI_GPG(6),   38  },
-            {   "IO21",  SUNXI_GPG(7),   40  },
+            {   "IO32",  SUNXI_GPA(18),  28  },    // I2C SCL.1
+            {   "IO12",  SUNXI_GPG(8),   32  },    // UART RTS.1
+            {   "IO16",  SUNXI_GPG(9),   36  },    // UART CTS.1
+            {   "IO20",  SUNXI_GPG(6),   38  },    // UART TX.1
+            {   "IO21",  SUNXI_GPG(7),   40  },    // UART RX.1
+            {   "SLED",  SUNXI_GPA(15),   2  },
             {
-                {   0,  0,  0}
+                { 0, 0, 0 }
             },
         }
     },
-	{"LED",
+	{"socp",
         {
-            {   "STATUS_LED",  SUNXI_GPA(15),  2 },
+            {   "PA12",   SUNXI_GPA(12),   3  },    // I2C SDA.0
+            {   "PA11",   SUNXI_GPA(11),   5  },    // I2C SCL.0
+            {   "PA6",    SUNXI_GPA(6),    7  },    // PWM       
+            {   "PA1",    SUNXI_GPA(1),   11  },    // UART RX.2
+            {   "PA0",    SUNXI_GPA(0),   13  },    // UART TX.2
+            {   "PA3",    SUNXI_GPA(3),   15  },    // UART CTS.2
+            {   "PC0",    SUNXI_GPC(0),   19  },    // SPI MOSI.0
+            {   "PC1",    SUNXI_GPC(1),   21  },    // SPI MISO.1
+            {   "PC2",    SUNXI_GPC(2),   23  },    // SPI CLK.1
+            {   "PA19",   SUNXI_GPA(19),  27  },    // I2C SDA.1
+            {   "PA7",    SUNXI_GPA(7),   29  },
+            {   "PA8",    SUNXI_GPA(8),   31  },
+            {   "PA9",    SUNXI_GPA(9),   33  },
+            {   "PA10",   SUNXI_GPA(10),  35  },
+            {   "PA20",   SUNXI_GPA(20),  37  },
+            {   "PA13",   SUNXI_GPA(13),   8  },    // UART TX.3
+            {   "PA14",   SUNXI_GPA(14),  10  },    // UART RX.3
+            {   "PD14",   SUNXI_GPD(14),  12  },
+            {   "PC4",    SUNXI_GPC(4),   16  },
+            {   "PC7",    SUNXI_GPC(7),   18  },
+            {   "PA2",    SUNXI_GPA(2),   22  },    // UART RTS.2
+            {   "PC3",    SUNXI_GPC(3),   24  },    // SPI CSO.1
+            {   "PA21",   SUNXI_GPA(21),  26  },
+            {   "PA18",   SUNXI_GPA(18),  28  },    // I2C SCL.1
+            {   "PG8",    SUNXI_GPG(8),   32  },    // UART RTS.1
+            {   "PG9",    SUNXI_GPG(9),   36  },    // UART CTS.1
+            {   "PG6",    SUNXI_GPG(6),   38  },    // UART TX.1
+            {   "PG7",    SUNXI_GPG(7),   40  },    // UART RX.1
+            {   "PA15",   SUNXI_GPA(15),   2  },
             {
-                {   0,  0,  0}
+                { 0, 0, 0 }
             },
         }
     },

@@ -28,7 +28,6 @@
     #define PyInt_AsLong PyLong_AsLong
 #endif
 
-
 #include "spi_lib.h"
 #include "../utilities/color.h"
 
@@ -45,7 +44,6 @@ int fd;
 #else
 #define debug(...)  ((void)0)
 #endif
-
 
 /**
  * Read n bytes from slave device
@@ -86,7 +84,6 @@ static PyObject* py_read(PyObject *self, PyObject* args){
 
     /* Do cleanup*/
     free(rx_buffer);
-    //Py_DECREF(item);
 
     /* Return list */
     return rx_list;
@@ -132,12 +129,10 @@ static PyObject* py_write(PyObject *self, PyObject* args){
     /* Do cleanup */
     free(tx_buffer);
 
-    //Py_DECREF(item);
     Py_DECREF(tx_list);
     
     Py_RETURN_NONE;
 }
-
 
 /**
  * Do transfer of data to slave device
@@ -198,7 +193,6 @@ static PyObject* py_xfer(PyObject* self, PyObject* args){
     free(rx_buffer);
 
     Py_DECREF(tx_list);
-    //Py_DECREF(item);
 
     return rx_list;
 }
@@ -299,13 +293,11 @@ PyMODINIT_FUNC
 #pragma GCC diagnostic ignored "-Wunused-but-set-variable"
     PyObject* module = NULL;
 
-
 #if PY_MAJOR_VERSION >= 3
     module = PyModule_Create(&module_def);
 #else
     module = Py_InitModule("spi", module_methods);
 #endif
-
 
 #if PY_MAJOR_VERSION >= 3
         return module;

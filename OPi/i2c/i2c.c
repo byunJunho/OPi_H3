@@ -90,7 +90,6 @@ static PyObject* py_read(PyObject* self, PyObject* args) {
     /* Read bytes and check return status */
     if (i2c_read(fd, read_buffer, bytes) < 0) {
         Py_DECREF(pylist);
-//        Py_DECREF(item);
         free(read_buffer);
         return PyErr_SetFromErrno(PyExc_IOError);
     }
@@ -108,7 +107,6 @@ static PyObject* py_read(PyObject* self, PyObject* args) {
 
     /* Cleanup */
     free(read_buffer);
-//    Py_DECREF(item);
 
     /* Return list */
     return pylist;
@@ -176,7 +174,6 @@ static PyObject* py_write(PyObject* self, PyObject* args) {
     /* Do cleanup */
     free(buffer);
     Py_DECREF(list);
-//    Py_DECREF(item);
     
     Py_RETURN_NONE;
 }
@@ -189,7 +186,6 @@ static PyObject* py_write(PyObject* self, PyObject* args) {
  * @return none
  */
 static PyObject* py_close(PyObject* self, PyObject *args) {
-    
     /* Close file descriptor */
     if (i2c_close(fd) < 0) {
         return PyErr_SetFromErrno(PyExc_IOError);
@@ -231,7 +227,6 @@ PyMODINIT_FUNC
     module = Py_InitModule("i2c", module_methods);
 #endif
 
-
     if (module == NULL)
 #if PY_MAJOR_VERSION >= 3
         return NULL;
@@ -246,6 +241,3 @@ PyMODINIT_FUNC
     #endif
 
 }
-
-
-

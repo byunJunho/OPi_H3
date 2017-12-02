@@ -29,20 +29,22 @@ The available constants are:
     PULLUP      ->      1
     PULLDOWN    ->      2
 
-The gpio are named by IO name :
+The gpio are named by Pin Number AND SoC Pin :
 
-    By port name: IO5, IO7, IO21, etc.
-    These can be imported from port module:
+    By pin number in GPIO : IO8, IO11, IO26, etc.
+    By SoC pin name : PA1, PA7, PA10, etc.
+    These can be imported from gpio module:
 
-    >>> from opiH3.gpio import port
+    >>> from OPi import gpio
     >>> dir(port)
 
 Generally these constants are just an offset in the memory from the base GPIO address, so they can
 be assigned to a number type variable.
 
-    >>> led = port.IO5
+    >>> led = gpio.IO8
     >>> print led
     226
+
 
 I2C METHODS
 ===========
@@ -69,34 +71,33 @@ GPIO::
 
     #!/usr/bin/env python
 
-    from opiH3.gpio import gpio
-    from opiH3.gpio import port
+    from OPi import gpio
  
     gpio.init() #Initialize module. Always called first
 
-    gpio.setcfg(port.IO5, gpio.OUTPUT)  #Configure LED1 as output
-    gpio.setcfg(port.IO5, 1)    #This is the same as above
+    gpio.setcfg(gpio.IO11, gpio.OUTPUT)  #Configure LED1 as output
+    gpio.setcfg(gpio.IO11, 1)    #This is the same as above
 
-    gpio.setcfg(port.IO23, gpio.INPUT)   #Configure PE11 as input
-    gpio.setcfg(port.IO23, 0)   #Same as above
+    gpio.setcfg(gpio.PA10, gpio.INPUT)   #Configure PA10 as input 
+    gpio.setcfg(gpio.PA10, 0)   #Same as above
 
-    gpio.pullup(port.IO23, 0)   #Clear pullups
-    gpio.pullup(port.IO23, gpio.PULLDOWN)    #Enable pull-down
-    gpio.pullup(port.IO23, gpio.PULLUP)  #Enable pull-up
+    gpio.pullup(gpio.PA10, 0)   #Clear pullups
+    gpio.pullup(gpio.PA10, gpio.PULLDOWN)    #Enable pull-down
+    gpio.pullup(gpio.PA10, gpio.PULLUP)  #Enable pull-up
 
     while True:
-        if gpio.input(port.IO23) == 1:
-            gpio.output(port.IO5, gpio.LOW)
-            gpio.output(port.IO5, 0)
+        if gpio.input(gpio.PA10) == 1:
+            gpio.output(gpio.IO11, gpio.LOW)
+            gpio.output(gpio.IO11, 0)
         else:
-            gpio.output(port.IO5, gpio.HIGH)
-            gpio.output(port.IO5, 1)
+            gpio.output(gpio.IO11, gpio.HIGH)
+            gpio.output(gpio.IO11, 1)
 
 I2C::
 
     #!/usr/bin/env python
 
-    from opiH3 import i2c
+    from OPi import i2c
 
     i2c.init("/dev/i2c-2")  #Initialize module to use /dev/i2c-2
     i2c.open(0x55)  #The slave device address is 0x55
@@ -115,7 +116,7 @@ SPI::
 
     #!/usr/bin/env python
 
-    from opiH3 import spi
+    from OPi import spi
 
     spi.open("/dev/spidev2.0")
     #Open SPI device with default settings

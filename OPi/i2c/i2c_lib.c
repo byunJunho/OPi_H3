@@ -21,7 +21,6 @@
  * MA 02110-1301, USA.
  */
 
-
 #include <stdio.h>
 #include <stdint.h>
 #include <fcntl.h>
@@ -46,7 +45,6 @@ int i2c_open(char *device, uint8_t address) {
         return ret;
 
     return fd;
-
 }
 
 int i2c_close(int fd) {
